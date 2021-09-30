@@ -163,7 +163,7 @@ function handleMessage(sender_psid,message) {
         callSendAPI(sender_psid, 'Hi there!');
     } else {
         // default logic
-        callSendAPI(sender_psid, response='default')
+        callSendAPI(sender_psid, response:'default');
     }
 }
 module.exports = {
