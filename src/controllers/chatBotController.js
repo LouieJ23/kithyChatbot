@@ -158,14 +158,40 @@ function firstTrait(nlp, name) {
 
 function handleMessage(sender_psid,message) {
     // check greeting is here and is confident
-    const greeting = firstEntity(message.nlp, 'greetings');
+   let entitiesArr = ["greetings", "thanks", "bye"];
+   let entityChosen = "";
+   entitiesArr.forEach((name) =>{
+   let entity = firstEntity(message.nlp, name);
+   if (entity && entity.confidence > 0.8) {
+       entityChosen = name;
+   }
+})
+    if(entityChosen === "") {
+        //default
+        callSendAPI(sender_psid, 'The bot is needed more training. Try typing "Thanks a lot" or "hi" to the bot');
+    }else{
+        if(entityChosen === "greetings") {
+            //send greetings message
+            callSendAPI(sender_psid, 'Hi there! This bot is created by Louie Jay Salvaña!');
+        }
+        if(entityChosen === "thanks") {
+            //send thanks message
+            callSendAPI(sender_psid, 'Thank You for using this bot. God Bless You!');
+        }
+        if(entityChosen === "bye") {
+            //send bye message
+            callSendAPI(sender_psid, 'Good Bye and have a good day!');
+        }
+    }
+}
+   /* const greeting = firstEntity(message.nlp, 'greetings');
     if (greeting && greeting.confidence > 0.8) {
         callSendAPI(sender_psid, 'Hi there!');
     } else {
         // default logic
         callSendAPI(sender_psid, 'default');
     }
-}
+}*/
 module.exports = {
     postWebhook: postWebhook,
     getWebhook: getWebhook
