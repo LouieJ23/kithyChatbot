@@ -10,9 +10,9 @@ let router = express.Router();
     }); */
 
 let initWebRoutes = (app)=> {
-    router.get("/", homepageController.getHomepage);
-    router.get("/webhook", chatBotController.getWebhook);
-    router.post("/webhook", chatBotController.postWebhook);
+    app.get("/", homepageController.getHomepage);
+    app.get("/webhook", chatBotController.getWebhook);
+    app.post("/webhook", chatBotController.postWebhook);
 
     return app.use("/", router);
 };
