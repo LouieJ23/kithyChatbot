@@ -39,8 +39,8 @@ let postWebhook = (req, res) => {
 };
 let getWebhook = (req, res) => {
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = process.env.MY_VERIFY_FB_TOKEN;
-
+    const VERIFY_TOKEN = process.env.MY_VERIFY_FB_TOKEN;
+    const PAGE_ACCESS_TOKEN = process.env.FB_PAGE_TOKEN;
 
     // Parse the query params
     let mode = req.query['hub.mode'];
