@@ -1,28 +1,35 @@
 require("dotenv").config();
-import request from "request";
+
 
 let postWebhook = (req, res) => {
+    // Parse the request body from the POST
     let body = req.body;
 
-    // Checks this is an event from a page subscription
+    // Check the webhook event is from a Page subscription
     if (body.object === 'page') {
 
-        // Iterates over each entry - there may be multiple if batched
+        // Iterate over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
 
-            // Gets the message. entry.messaging is an array, but
-            // will only ever contain one message, so we get index 0
+            // Gets the body of the webhook event
             let webhook_event = entry.messaging[0];
             console.log(webhook_event);
+
+            // Get the sender PSID
+            let sender_psid = webhook_event.sender.id;
+            console.log('Sender PSID: ' + sender_psid);
+
         });
 
-        // Returns a '200 OK' response to all requests
+        // Return a '200 OK' response to all events
         res.status(200).send('EVENT_RECEIVED');
+
     } else {
-        // Returns a '404 Not Found' if event is not from a page subscription
+        // Return a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
     }
 };
+
 let getWebhook = (req, res) => {
     let VERIFY_TOKEN = "process.env.MY_VERIFY_FB_TOKEN"
 
@@ -47,6 +54,7 @@ let getWebhook = (req, res) => {
         }
     }
 };
+
 /*let getWebhook = (req, res) => {
     // Your verify token. Should be a random string.
     const VERIFY_TOKEN = process.env.MY_VERIFY_FB_TOKEN;
@@ -75,131 +83,21 @@ let getWebhook = (req, res) => {
 };*/
 
 // Handles messages events
-/*function handleMessage(sender_psid, received_message) {
-    let response;
+function handleMessage(sender_psid, received_message) {
 
-    // Check if the message contains text
-    if (received_message.text) {
+}
 
-        // Create the payload for a basic text message
-        response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an image!`
-        }
-    } else if (received_message.attachments) {
-        //Gets the URL of the message attachment
-        let attachment_url = received_message.attachments[0].payload.url;
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
-                        ],
-                    }]
-                }
-            }
-        }
-    }
-
-    // Sends the response message
-    callSendAPI(sender_psid, response);
-}*/
-//-------------------------------
 // Handles messaging_postbacks events
-/*function handlePostback(sender_psid, received_postback) {
-    let response;
+function handlePostback(sender_psid, received_postback) {
 
-    // Get the payload for the postback
-    let payload = received_postback.payload;
-
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
-    }
-    // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": {"text":response}
-    };
 
-    // Send the HTTP request to the Messenger Platform
-    request({
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": process.env.FB_PAGE_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!');
-        } else {
-            console.error("Unable to send message:" + err);
-        }
-    });
-}
-function firstTrait(nlp, name) {
-    return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
-function handleMessage(sender_psid,message) {
-    // check greeting is here and is confident
-   let entitiesArr = ["greetings", "thanks", "bye"];
-   let entityChosen = "";
-   entitiesArr.forEach((name) =>{
-   let entity = firstEntity(message.nlp, name);
-   if (entity && entity.confidence > 0.8) {
-       entityChosen = name;
-   }
-})
-    if(entityChosen === "") {
-        //default
-        callSendAPI(sender_psid, 'The bot is needed more training. Try typing "Thanks a lot" or "hi" to the bot');
-    }else{
-        if(entityChosen === "greetings") {
-            //send greetings message
-            callSendAPI(sender_psid, 'Hi there! This bot is created by Louie Jay Salvaña!');
-        }
-        if(entityChosen === "thanks") {
-            //send thanks message
-            callSendAPI(sender_psid, 'Thank You for using this bot. God Bless You!');
-        }
-        if(entityChosen === "bye") {
-            //send bye message
-            callSendAPI(sender_psid, 'Good Bye and have a good day!');
-        }
-    }
-}*/
-   /* const greeting = firstEntity(message.nlp, 'greetings');
-    if (greeting && greeting.confidence > 0.8) {
-        callSendAPI(sender_psid, 'Hi there!');
-    } else {
-        // default logic
-        callSendAPI(sender_psid, 'default');
-    }
-}*/
+
 module.exports = {
     postWebhook: postWebhook,
     getWebhook: getWebhook
