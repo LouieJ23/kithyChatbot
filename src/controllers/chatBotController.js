@@ -1,5 +1,3 @@
-import request from "express";
-
 require("dotenv").config();
 import request from "request";
 
