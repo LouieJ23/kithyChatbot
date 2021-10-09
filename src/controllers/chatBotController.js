@@ -100,7 +100,7 @@ function handleMessage(sender_psid, received_message) {
 
         // Create the payload for a basic text message
         response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an image!`
+            "text": "You sent the message: " + received_message.text + "Now send me an image!"
         }
 
     } else if (received_message.attachments) {
@@ -176,6 +176,7 @@ function callSendAPI(sender_psid, response) {
     }, (err, res, body) => {
         if (!err) {
             console.log('message sent!');
+            console.log("My message: " + response);
 
         } else {
             console.error("Unable to send message:" + err);
