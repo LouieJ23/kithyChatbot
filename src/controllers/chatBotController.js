@@ -1,4 +1,4 @@
-import {response} from "express";
+import request from "express";
 
 require("dotenv").config();
 import request from "request";
@@ -110,9 +110,9 @@ let getWebhook = (req, res) => {
     // Sends the response message
     callSendAPI(sender_psid, response);
 }*/
-
+//-------------------------------
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
+/*function handlePostback(sender_psid, received_postback) {
     let response;
 
     // Get the payload for the postback
@@ -183,7 +183,7 @@ function handleMessage(sender_psid,message) {
             callSendAPI(sender_psid, 'Good Bye and have a good day!');
         }
     }
-}
+}*/
    /* const greeting = firstEntity(message.nlp, 'greetings');
     if (greeting && greeting.confidence > 0.8) {
         callSendAPI(sender_psid, 'Hi there!');
