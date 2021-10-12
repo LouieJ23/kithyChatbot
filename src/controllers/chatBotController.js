@@ -81,7 +81,7 @@ function handleMessage(sender_psid, received_message) {
 
         // Gets the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
-         response = {
+        response = {
             "attachment": {
                 "type": "template",
                 "payload": {
@@ -105,8 +105,8 @@ function handleMessage(sender_psid, received_message) {
                     }]
                 }
             }
+        }
     }
-}
 
     // Sends the response message
     callSendAPI(sender_psid, response);
