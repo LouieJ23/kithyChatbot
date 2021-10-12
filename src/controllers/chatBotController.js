@@ -40,7 +40,7 @@ let postWebhook = (req, res) => {
 };
 
 let getWebhook = (req, res) => {
-    let VERIFY_TOKEN = "process.env.FB_PAGE_TOKEN"
+    let VERIFY_TOKEN = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
 
     // Parse the query params
     let mode = req.query['hub.mode'];
