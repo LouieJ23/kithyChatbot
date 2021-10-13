@@ -1,5 +1,5 @@
 require("dotenv").config();
-import request from "request";
+//import request from "request";
 
 let postWebhook = (req, res) => {
     // Parse the request body from the POST
@@ -22,11 +22,11 @@ let postWebhook = (req, res) => {
 
             // Check if the event is a message or postback and
             // pass the event to the appropriate handler function
-            if (webhook_event.message) {
+            /*if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
-            }
+            }*/
 
         });
 
@@ -40,7 +40,8 @@ let postWebhook = (req, res) => {
 };
 
 let getWebhook = (req, res) => {
-    let VERIFY_TOKEN = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+    // Your verify token. Should be a random string.
+    let VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>"
 
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -64,7 +65,7 @@ let getWebhook = (req, res) => {
     }
 };
 
-
+/*
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
@@ -157,7 +158,7 @@ function callSendAPI(sender_psid, response) {
         }
     });
 }
-
+*/
 
 module.exports = {
     postWebhook: postWebhook,
