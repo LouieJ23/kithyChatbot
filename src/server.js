@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 //const app = express()
 //const dialogflow = require("dialogflow")
 //let app = express();
-const request = require('request-promise-native');
+//const request = require('request-promise-native');
 const {WebhookClient} = require('dialogflow-fulfillment');
 let app = express().use(bodyParser.json)
 
@@ -27,20 +27,5 @@ app.listen(port, ()=> {
     console.log('App is running at the port ' +  port + "!");
 });
 
-
-app.post('/webhook', (request, response) => {
-
-  const agent = new WebhookClient({request, response});
-
-    function welcome(agent) {
-        agent.add('Welcome to my Agent!');
-    }
-
-
-        let intentMap = new Map();
-        intentMap.set('Default Welcome Intent', welcome);
-        agent.handleRequest(intentMap);
-
-});
 
 
