@@ -3,11 +3,16 @@ import express from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 import bodyParser from "body-parser";
-const dialogflow = require("dialogflow")
-const {WebhookClient} = require('dialogflow-fulfillment');
+
+//const express = require('express')
+//const bodyParser = require('body-parser')
+//const app = express()
+//const dialogflow = require("dialogflow")
 //let app = express();
 
-const app = express().use(bodyParser.json)
+const {WebhookClient} = require('dialogflow-fulfillment');
+let app = express().use(bodyParser.json)
+
 //config view engine
 viewEngine(app);
 
@@ -18,28 +23,27 @@ viewEngine(app);
 //init all web routes
 initWebRoute(app);
 
-let port = process.env.PORT||8080;
 
+app.post("/dialogflow-fulfillment", (request, response) => {
+    console.log("test")
+})
+
+let port = process.env.PORT||8080;
 app.listen(port, ()=> {
     console.log('App is running at the port ' +  port + "!");
 });
 
-
-app.post("/webhook", (request, response) => {
-    // const agent = new WebhookClient({request: req, response: res});
+  /* const agent = new WebhookClient({request, response});
 
     function welcome(agent) {
         agent.add('Welcome to my Agent!');
     }
 
-    function WebHookProcessing(req, res) {
-        const agent = new WebhookClient({request: req, response: res});
-        console.info('agent set');
 
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcome);
         agent.handleRequest(intentMap);
-    }
-});
+
+});*/
 
 
