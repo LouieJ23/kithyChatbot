@@ -1,5 +1,5 @@
 require("dotenv").config();
-//import request from "request";
+import request from "request";
 
 let postWebhook = (req, res) => {
     // Parse the request body from the POST
@@ -22,11 +22,11 @@ let postWebhook = (req, res) => {
 
             // Check if the event is a message or postback and
             // pass the event to the appropriate handler function
-            /*if (webhook_event.message) {
+            if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
-            }*/
+            }
 
         });
 
@@ -65,7 +65,7 @@ let getWebhook = (req, res) => {
     }
 };
 
-/*
+
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
@@ -75,37 +75,7 @@ function handleMessage(sender_psid, received_message) {
 
         // Create the payload for a basic text message
         response = {
-            "text": "You sent the message: " + received_message.text + "Now send me an image!"
-        }
-
-    } else if (received_message.attachments) {
-
-        // Gets the URL of the message attachment
-        let attachment_url = received_message.attachments[0].payload.url;
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
-                        ],
-                    }]
-                }
-            }
+            "text": `You sent the message: "${received_message.text}". Now send me an image!`
         }
     }
 
@@ -114,6 +84,37 @@ function handleMessage(sender_psid, received_message) {
 
 }
 
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {
+
+}
+
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "message": response
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": process.env.FACEBOOK_PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+            console.log("My message: " ${response});
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+}
+/*
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
     let response;
