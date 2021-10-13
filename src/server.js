@@ -5,7 +5,7 @@ import express from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 import bodyParser from "body-parser";
-//const dialogflow =require("dialogflow")
+const dialogflow = require("dialogflow")
 const {WebhookClient} = require('dialogflow-fulfillment');
 let app = express();
 
@@ -31,13 +31,12 @@ app.post("/webhook", (request, response) => {
     const _agent = new WebhookClient({request: request, response: response});
 
     function Welcome(agent) {
-        agent.add('Welcome to my Agent!');
+       return agent.add('Welcome to my Agent!');
     }
 
     let intents = new Map();
-    _agent.handleRequest(intents)
-
-    intents.set("Default Welcome Intent", Welcome)
-})
+    intents.set("Default Welcome Intent", Welcome);
+    _agent.handleRequest(intents);
+});
 
 
