@@ -8,16 +8,16 @@ import bodyParser from "body-parser";
 //const bodyParser = require('body-parser')
 //const app = express()
 //const dialogflow = require("dialogflow")
-//let app = express();
+let app = express();
 //const request = require('request-promise-native');
 const {WebhookClient} = require('dialogflow-fulfillment');
-let app = express().use(bodyParser.json)
+//let app = express().use(bodyParser.json)
 
 //config view engine
 viewEngine(app);
 
 //use body-parser to post data
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //init all web routes
