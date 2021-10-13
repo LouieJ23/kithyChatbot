@@ -5,11 +5,6 @@ import chatBotController from "../controllers/chatBotController";
 let router = express.Router();
 
 
-/*let initWebRoutes = (app)=> {
-    router.get("/", (req, res) => {
-      return res.send("Hello World!");
-    }); */
-
 
 let initWebRoutes = (app)=> {
     router.get("/", homepageController.getHomepage);

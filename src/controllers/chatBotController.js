@@ -1,6 +1,5 @@
 require("dotenv").config();
 import request from "request";
-
 let postWebhook = (req, res) => {
     // Parse the request body from the POST
     let body = req.body;
