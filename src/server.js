@@ -1,5 +1,3 @@
-
-
 require("dotenv").config();
 import express from "express";
 import viewEngine from "./config/viewEngine";
@@ -7,15 +5,15 @@ import initWebRoute from "./routes/web";
 import bodyParser from "body-parser";
 const dialogflow = require("dialogflow")
 const {WebhookClient} = require('dialogflow-fulfillment');
-let app = express();
+//let app = express();
 
-
+const app = express().use(bodyParser.json)
 //config view engine
 viewEngine(app);
 
 //use body-parser to post data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 //init all web routes
 initWebRoute(app);
@@ -28,15 +26,20 @@ app.listen(port, ()=> {
 
 
 app.post("/webhook", (request, response) => {
-    const _agent = new WebhookClient({request: request, response: response});
+    // const agent = new WebhookClient({request: req, response: res});
 
-    function Welcome(agent) {
-       return agent.add('Welcome to my Agent!');
+    function welcome(agent) {
+        agent.add('Welcome to my Agent!');
     }
 
-    let intents = new Map();
-    intents.set("Default Welcome Intent", Welcome);
-    _agent.handleRequest(intents);
+    function WebHookProcessing(req, res) {
+        const agent = new WebhookClient({request: req, response: res});
+        console.info('agent set');
+
+        let intentMap = new Map();
+        intentMap.set('Default Welcome Intent', welcome);
+        agent.handleRequest(intentMap);
+    }
 });
 
 
