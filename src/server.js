@@ -28,22 +28,9 @@ app.listen(port, ()=> {
 });
 
 
-app.post('/dialogflow-fulfillment', (request, response) => {
-    dialogflowfulfillment(request, response)
-})
+app.post('/webhook', (request, response) => {
 
-const dialogflowfulfillment = (request, response) => {
-    const agent = new WebhookClient({request, response})
-
-        function welcome(agent) {
-        agent.add("Hi from heroku!")
-        }
-        let intentMap = new Map();
-        intentMap.set('Default Welcome Intent', welcome);
-        agent.handleRequest(intentMap);
-}
-
-  /* const agent = new WebhookClient({request, response});
+  const agent = new WebhookClient({request, response});
 
     function welcome(agent) {
         agent.add('Welcome to my Agent!');
@@ -54,6 +41,6 @@ const dialogflowfulfillment = (request, response) => {
         intentMap.set('Default Welcome Intent', welcome);
         agent.handleRequest(intentMap);
 
-});*/
+});
 
 
