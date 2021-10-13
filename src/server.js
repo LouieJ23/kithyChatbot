@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 //const app = express()
 //const dialogflow = require("dialogflow")
 //let app = express();
-
+const request = require('request-promise-native');
 const {WebhookClient} = require('dialogflow-fulfillment');
 let app = express().use(bodyParser.json)
 
@@ -18,20 +18,30 @@ viewEngine(app);
 
 //use body-parser to post data
 //app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //init all web routes
 initWebRoute(app);
-
-
-app.post("/dialogflow-fulfillment", (request, response) => {
-    console.log("test")
-})
-
 let port = process.env.PORT||8080;
 app.listen(port, ()=> {
     console.log('App is running at the port ' +  port + "!");
 });
+
+
+app.post('/dialogflow-fulfillment', (request, response) => {
+    dialogflowfulfillment(request, response)
+})
+
+const dialogflowfulfillment = (request, response) => {
+    const agent = new WebhookClient({request, response})
+
+        function welcome(agent) {
+        agent.add("Hi from heroku!")
+        }
+        let intentMap = new Map();
+        intentMap.set('Default Welcome Intent', welcome);
+        agent.handleRequest(intentMap);
+}
 
   /* const agent = new WebhookClient({request, response});
 
