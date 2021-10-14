@@ -1,3 +1,5 @@
+//import {dialogflow} from "actions-on-google";
+
 require("dotenv").config();
 import express from "express";
 import viewEngine from "./config/viewEngine";
@@ -21,26 +23,23 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*app.get("/", function(req,res) {
-        res.send('<h1> This is my web app</h1>');
-    });
-*/
-app.post("/webhook", function(req,res) {
-    let intent = req.body.queryResult.intent.displayName;
-    let obj = {fulfillmentText: "The intent name is: " + intent};
-    console.log("json string is:" + JSON.stringify(obj));
-    res.send(JSON.stringify(obj));
 
-    let agent = new WebhookClient({request: req, response: res});
+app.post('/dialogflow-fulfillment', (request, response) =>{
+    dialogflowfulfillment(request, response)
+})
+
+let dialogflowfulfillment = (request, response) => {
+    let agent = new WebhookClient({request, response})
+
     function welcome(agent) {
         agent.add('Welcome to my agent!');
     }
-
     let intents = new Map();
     intents.set("Default Welcome Intent", welcome)
     agent.handleRequest(intents).then();
 
-});
+}
+
 
 
 //init all web routes
