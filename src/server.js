@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.post('/dialogflow-fulfillment', (request, response) =>{
+app.post('/webhook', (request, response) =>{
     dialogflowfulfillment(request, response)
 })
 
