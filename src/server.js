@@ -18,14 +18,14 @@ viewEngine(app);
 
 //use body-parser to post data
 app.use(bodyParser.json());
-//app.use(express.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /*app.get("/", function(req,res) {
         res.send('<h1> This is my web app</h1>');
     });
 */
-app.post("/webhook", function(req,res) {
+app.post("/", function(req,res) {
     let intent = req.body.queryResult.intent.displayName;
     let obj = {fulfillmentText: "The intent name is: " + intent};
     console.log("json string is:" + JSON.stringify(obj));
