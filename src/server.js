@@ -24,8 +24,8 @@ app.post('/webhook', (request, response) =>{
 let dialogflowfulfillment = (request, response) => {
     let agent = new WebhookClient({request, response})
 
-    function welcome(agent) {
-        const welcome = agent.parameters.word;
+    function welcomeIntent(agent) {
+        const welcome = agent.parameters.welcome;
         agent.add('This is from default welcome intent called: ' + welcome);
     }
 
@@ -34,7 +34,7 @@ let dialogflowfulfillment = (request, response) => {
     }
 
     let intentMap = new Map();
-    intentMap.set("Default Welcome Intent", welcome);
+    intentMap.set("Default Welcome Intent", welcomeIntent);
     intentMap.set("Default Fallback Intent", fallback);
     agent.handleRequest(intentMap).then();
 
