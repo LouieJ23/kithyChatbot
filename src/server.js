@@ -10,7 +10,7 @@ import bodyParser from "body-parser";
 //const dialogflow = require("dialogflow")
 let app = express();
 //const request = require('request-promise-native');
-const {WebhookClient} = require('dialogflow-fulfillment');
+
 //let app = express().use(bodyParser.json)
 
 //config view engine
@@ -18,7 +18,19 @@ viewEngine(app);
 
 //use body-parser to post data
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/", function(req,res) {
+        res.send('<h1> This is my web app');
+    });
+
+app.post("/webhook", function(req,res) {
+    let intent = req.body.queryResult.intent.displayName;
+    let obj = {fulfillmentText:"The intent name is: " + intent};
+    console.log("json string is:" + JSON.stringify(obj));
+    res.send(JSON.stringify(obj));
+});
 
 //init all web routes
 initWebRoute(app);
