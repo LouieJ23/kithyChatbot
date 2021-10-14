@@ -28,13 +28,12 @@ let dialogflowfulfillment = (request, response) => {
     function welcomeIntent(agent) {
         const welcome = agent.parameters.welcome;
         agent.add('This is from default welcome intent called: ' + welcome);
-            return axios.get('https://dialogflow.cloud.google.com/v1/integrations/facebook/webhook/7bad499e-6726-48e0-a97a-653af60e92f2')
+            return axios.get('/webhook')
             .then((result) => {
                 result.data.map(welcomeObj => {
                     agent.add(welcomeObj.welcome);
                     });
             });
-       // agent.add('This is from default welcome intent called: ' + welcome);
     }
 
     function fallback(agent) {
