@@ -35,9 +35,10 @@ app.post("/webhook", function(req,res) {
     function welcome(agent) {
         agent.add('Welcome to my agent!');
     }
+
     let intents = new Map();
     intents.set("Default Welcome Intent", welcome)
-    agent.handleRequest(intents)
+    agent.handleRequest(intents).then();
 
 });
 
