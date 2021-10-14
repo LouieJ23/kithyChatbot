@@ -1,5 +1,3 @@
-import {WebhookClient} from "dialogflow-fulfillment";
-
 require("dotenv").config();
 import express from "express";
 import viewEngine from "./config/viewEngine";
