@@ -30,12 +30,13 @@ let dialogflowfulfillment = (request, response) => {
     function welcomeIntent(agent) {
         const welcome = agent.parameters.welcome;
         agent.add('This is from default welcome intent called: ' + welcome);
-             return axios.get('/https://dialogflow.cloud.google.com/#/agent/kithychatbot-bif9/editIntent/6811a59e-29cf-42c7-854f-b1418939d7e0/')
-            // .then((result) => {
-            //     result.data.map(welcomeObj => {
-            //         agent.add(welcomeObj.welcome);
-            //         });
-            // });
+             return axios.get('/webhook')
+            .then((result) => {
+                result.data.map(welcomeObj => {
+                    agent.add(welcomeObj.welcome);
+                    });
+            });
+
     }
 
     function fallback(agent) {
