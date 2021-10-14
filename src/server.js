@@ -25,7 +25,7 @@ let dialogflowfulfillment = (request, response) => {
     let agent = new WebhookClient({request, response})
 
     function welcome(agent) {
-        const welcome = agent.parameters.word;
+        const welcome = agent.parameters.welcome;
         agent.add('This is from default welcome intent: ' + welcome);
     }
 
