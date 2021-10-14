@@ -1,3 +1,5 @@
+import {WebhookClient} from "dialogflow-fulfillment";
+
 require("dotenv").config();
 import express from "express";
 import viewEngine from "./config/viewEngine";
@@ -10,7 +12,7 @@ import bodyParser from "body-parser";
 //const dialogflow = require("dialogflow")
 let app = express();
 //const request = require('request-promise-native');
-//const {WebhookClient} = require('dialogflow-fulfillment');
+const {WebhookClient} = require('dialogflow-fulfillment');
 //let app = express().use(bodyParser.json)
 
 //config view engine
@@ -30,6 +32,15 @@ app.post("/webhook", function(req,res) {
     let obj = {fulfillmentText: "The intent name is: " + intent};
     console.log("json string is:" + JSON.stringify(obj));
     res.send(JSON.stringify(obj));
+
+    let agent = new WebhookClient({request: req, response: res});
+    function welcome(agent) {
+        agent.add('Welcome to my agent!');
+    }
+    let intents = new Map();
+    intents.set("Default Welcome Intent", welcome)
+    agent.handleRequest(intents)
+
 });
 
 
