@@ -10,7 +10,7 @@ import bodyParser from "body-parser";
 //const dialogflow = require("dialogflow")
 let app = express();
 //const request = require('request-promise-native');
-const {WebhookClient} = require('dialogflow-fulfillment');
+//const {WebhookClient} = require('dialogflow-fulfillment');
 //let app = express().use(bodyParser.json)
 
 //config view engine
@@ -31,17 +31,17 @@ app.post("/webhook", function(req,res) {
     console.log("json string is:" + JSON.stringify(obj));
     res.send(JSON.stringify(obj));
 })
-    let dialogflowfulfillment = (request, response) => {
-     let agent = new WebhookClient({request, response})
+   /* let dialogflowfulfillment = (request, response) => {
+     const agent = new WebhookClient({request, response})
 
         function welcome(agent){
             agent.add("Hi there, this response is coming from local code");
-    }
+         }
         let intentMap = new Map();
         intentMap.set("Default Welcome Intent", welcome)
-
+        agent.handleRequest(intentMap);
     }
-
+*/
 
 
 //init all web routes
