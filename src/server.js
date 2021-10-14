@@ -6,6 +6,7 @@ import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 import bodyParser from "body-parser";
 const {WebhookClient} = require('dialogflow-fulfillment');
+const axios = require('axios');
 let app = express();
 
 //config view engine
@@ -26,7 +27,13 @@ let dialogflowfulfillment = (request, response) => {
 
     function welcomeIntent(agent) {
         const welcome = agent.parameters.welcome;
-        agent.add('This is from default welcome intent called: ' + welcome);
+            return axios.get('https://dialogflow.cloud.google.com/v1/integrations/facebook/webhook/7bad499e-6726-48e0-a97a-653af60e92f2')
+            .then((result) => {
+                result.data.map(welcomeObj => {
+                    agent.add(welcomeObj.welcome);
+                    });
+            });
+       // agent.add('This is from default welcome intent called: ' + welcome);
     }
 
     function fallback(agent) {
