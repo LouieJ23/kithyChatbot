@@ -27,9 +27,16 @@ app.get("/", function(req,res) {
 
 app.post("/webhook", function(req,res) {
     let intent = req.body.queryResult.intent.displayName;
-    let obj = {fulfillmentText:"The intent name is: " + intent};
+    let obj = {fulfillmentText: "The intent name is: " + intent};
     console.log("json string is:" + JSON.stringify(obj));
     res.send(JSON.stringify(obj));
+
+    function welcome(agent){
+        agent.add("Hi there, this response is coming from local code")
+    }
+    let intentMap = new Map();
+    intentMap.set("Default Welcome Intent", welcome)
+
 });
 
 //init all web routes
