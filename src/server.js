@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
         res.send('<h1> This is my web app</h1>');
     });
 */
-app.post("/", function(req,res) {
+app.post("/webhook", function(req,res) {
     let intent = req.body.queryResult.intent.displayName;
     let obj = {fulfillmentText: "The intent name is: " + intent};
     console.log("json string is:" + JSON.stringify(obj));
