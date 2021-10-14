@@ -28,12 +28,12 @@ let dialogflowfulfillment = (request, response) => {
     function welcomeIntent(agent) {
         const welcome = agent.parameters.welcome;
         agent.add('This is from default welcome intent called: ' + welcome);
-            return axios.get('/webhook')
-            .then((result) => {
-                result.data.map(welcomeObj => {
-                    agent.add(welcomeObj.welcome);
-                    });
-            });
+            // return axios.get('/webhook')
+            // .then((result) => {
+            //     result.data.map(welcomeObj => {
+            //         agent.add(welcomeObj.welcome);
+            //         });
+            // });
     }
 
     function fallback(agent) {
