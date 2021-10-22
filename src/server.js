@@ -39,6 +39,7 @@ app.post('/webhook', (request, response) =>{
          agent.add('This is from default welcome intent called: ' + welcome);
      }
         let intentMap = new Map();
+        intentMap.set("Default Welcome Intent", welcomeIntent);
         _agent.handleRequest(intentMap)
 })
 
