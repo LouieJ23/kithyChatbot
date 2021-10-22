@@ -6,7 +6,7 @@ import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 const bodyParser = require('body-parser')
 // import bodyParser from "body-parser";
-//const dialogflow = require('dialogflow');
+const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
 //const axios = require('axios');
 //let app = express();
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //     let agent = new WebhookClient({request, response})
 
 app.post('/webhook', (request, response) =>{
-     const _agent = new WebhookClient({request: request, reponse: response});
+     const _agent = new WebhookClient({request, response});
 
      function welcomeIntent(agent) {
          const welcome = agent.parameters.welcome;
