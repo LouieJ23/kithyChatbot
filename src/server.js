@@ -4,10 +4,14 @@ require("dotenv").config();
 import express from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
-import bodyParser from "body-parser";
+const bodyParser = require('body-parser')
+// import bodyParser from "body-parser";
+const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
-const axios = require('axios');
-let app = express();
+//const axios = require('axios');
+//let app = express();
+
+const app = express().use(bodyParser.json())
 
 //config view engine
 viewEngine(app);
@@ -17,19 +21,31 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-'use strict';
+//'use strict';
 
+
+// app.post('/webhook', (request, response) =>{
+//     dialogflowfulfillment(request, response)
+// })
+//
+// let dialogflowfulfillment = (request, response) => {
+//     let agent = new WebhookClient({request, response})
 
 app.post('/webhook', (request, response) =>{
-    dialogflowfulfillment(request, response)
+     const _agent = new WebhookClient({request: request, reponse: response});
+
+     function welcomeIntent(agent) {
+         const welcome = agent.parameters.welcome;
+         agent.add('This is from default welcome intent called: ' + welcome);
+     }
+        let intentMap = new Map();
+        _agent.handleRequest(intentMap)
 })
 
-let dialogflowfulfillment = (request, response) => {
-    let agent = new WebhookClient({request, response})
 
-    function welcomeIntent(agent) {
-        const welcome = agent.parameters.welcome;
-        agent.add('This is from default welcome intent called: ' + welcome);
+    // function welcomeIntent(agent) {
+    //     const welcome = agent.parameters.welcome;
+    //     agent.add('This is from default welcome intent called: ' + welcome);
             //  return axios.get('/webhook')
             // .then((result) => {
             //     result.data.map(welcomeObj => {
@@ -37,18 +53,18 @@ let dialogflowfulfillment = (request, response) => {
             //         });
             // });
 
-    }
+    // }
 
-    function fallback(agent) {
-        agent.add('This is from default fallback intent called: ')
-    }
+    // function fallback(agent) {
+    //     agent.add('This is from default fallback intent called: ')
+    // }
+    //
+    // let intentMap = new Map();
+    // intentMap.set("Default Welcome Intent", welcomeIntent);
+    // intentMap.set("Default Fallback Intent", fallback);
+    // _agent.handleRequest(intentMap)
 
-    let intentMap = new Map();
-    intentMap.set("Default Welcome Intent", welcomeIntent);
-    intentMap.set("Default Fallback Intent", fallback);
-    agent.handleRequest(intentMap).then();
-
-}
+// }
 
 
 
