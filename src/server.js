@@ -6,7 +6,7 @@ import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 const bodyParser = require('body-parser')
 // import bodyParser from "body-parser";
-const dialogflow = require('dialogflow');
+//const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
 //const axios = require('axios');
 //let app = express();
@@ -40,7 +40,7 @@ app.post('/webhook', (request, response) =>{
      }
         let intentMap = new Map();
         intentMap.set("Default Welcome Intent", welcomeIntent);
-        _agent.handleRequest(intentMap)
+        _agent.handleRequest(intentMap).then();
 })
 
 
