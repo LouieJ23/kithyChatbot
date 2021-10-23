@@ -35,8 +35,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //      const _agent = new WebhookClient({request:request, response:response});
     app.post("/webhook", function(request, response) {
 
-        const fulfillment = request.body.queryResult.fulfillmentMessages;
-       const obj = {fulfillment};
+        //const fulfillment = request.body.queryResult.fulfillmentText;
+       const fulfillment = request.fulfillmentMessages[0].text.text[0];
+        const obj = {fulfillment};
         console.log("json string is" + JSON.stringify(obj));
         response.send(JSON.stringify(obj));
     })
