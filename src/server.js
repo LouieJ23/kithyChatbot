@@ -35,25 +35,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //      const _agent = new WebhookClient({request:request, response:response});
 
         app.post("/webhook", function(request, response) {
-        const _agent = new WebhookClient({request,response});
+        // let _agent = new WebhookClient({request,response});
         //const fulfillment = request.body.queryResult.fulfillmentText;
         const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
         const obj = {fulfillment};
         console.log("json string is" + JSON.stringify(obj));
         response.send(JSON.stringify(obj));
 
-        function welcomeIntent(agent) {
-            const welcome = agent.parameters.welcome;
-            agent.add('This is from default welcome intent called: ' + welcome);
-        }
-        let intentMap = new Map();
-        intentMap.set("Default Welcome Intent", welcomeIntent);
-        _agent.handleRequest(intentMap).then();
-    })
 
+        // function welcomeIntent(agent) {
+        //
+        //     //const welcome = agent.parameters.welcome; --> this will show the intent name
+        //     agent.add('This is from default welcome intent called: ' + welcome);
+        // }
+        // let intentMap = new Map();
+        // intentMap.set("Default Welcome Intent", welcomeIntent);
+        // _agent.handleRequest(intentMap).then();
 
-
-
+})
 
 
     // function welcomeIntent(agent) {
