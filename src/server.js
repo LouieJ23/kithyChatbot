@@ -31,17 +31,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // let dialogflowfulfillment = (request, response) => {
 //     let agent = new WebhookClient({request, response})
 
-app.post('/webhook', (request, response) =>{
-     const _agent = new WebhookClient({request, response});
+// app.post('/webhook', (request, response) =>{
+//      const _agent = new WebhookClient({request:request, response:response});
+    app.post("/webhook", function(request, response) {
 
-     function welcomeIntent(agent) {
-         const welcome = agent.parameters.welcome;
-         agent.add('This is from default welcome intent called: ' + welcome);
-     }
-        let intentMap = new Map();
-        intentMap.set("Default Welcome Intent", welcomeIntent);
-        _agent.handleRequest(intentMap).then();
-})
+        const intent = request.body.queryResult.intent.displayName;
+        const obj = {fulfillmentText: "The intent name is " + intent};
+        console.log("json string is" + JSON.stringify(obj));
+        response.send(JSON.stringify(obj));
+    })
+
+
+//     function welcomeIntent(agent) {
+//          const welcome = agent.parameters.welcome;
+//          agent.add('This is from default welcome intent called: ' + welcome);
+//      }
+//         let intentMap = new Map();
+//         intentMap.set("Default Welcome Intent", welcomeIntent);
+//         _agent.handleRequest(intentMap).then();
+// })
 
 
     // function welcomeIntent(agent) {
