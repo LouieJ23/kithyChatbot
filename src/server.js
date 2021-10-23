@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //      const _agent = new WebhookClient({request:request, response:response});
     app.post("/webhook", function(request, response) {
 
-        const fulfillment = request.body.queryResult.fulfillmentText.fulfillmentMessages;
+        const fulfillment = request.body.queryResult.fulfillmentText;
         //const obj = {fulfillmentText: "The intent name is " + intent};
         console.log("json string is" + JSON.stringify(fulfillment));
         response.send(JSON.stringify(fulfillment));
