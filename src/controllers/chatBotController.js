@@ -69,6 +69,16 @@ let getWebhook = (req, res) => {
     }
 };
 
+app.post("/webhook", function(req, res) {
+    // let _agent = new WebhookClient({request,response});
+    //const fulfillment = request.body.queryResult.fulfillmentText;
+    const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
+    const intent = req.body.queryResult.intent.displayName;
+    const obj = {fulfillment};
+    console.log("json string is" + JSON.stringify(obj) + "from:" + intent);
+    res.send(JSON.stringify(obj));
+
+});
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
@@ -81,6 +91,7 @@ function handleMessage(sender_psid, received_message) {
         /*response = {
             "text": `You sent the message: "${received_message.text}". Now send me an image!`
         }*/
+
 
     } else if (received_message.attachments) {
 
