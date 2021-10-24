@@ -5,13 +5,15 @@ import express from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 const bodyParser = require('body-parser')
-// import bodyParser from "body-parser";
 const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
+const app = express().use(bodyParser.json())
+
+// import bodyParser from "body-parser";
 //const axios = require('axios');
 //let app = express();
 
-const app = express().use(bodyParser.json())
+
 
 //config view engine
 viewEngine(app);
@@ -24,6 +26,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //'use strict';
 
 
+        app.post("/webhook", function(request, response) {
+        // let _agent = new WebhookClient({request,response});
+        //const fulfillment = request.body.queryResult.fulfillmentText;
+        const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
+        const intent = request.body.queryResult.intent.displayName;
+        const obj = {fulfillment};
+        console.log("json string is" + JSON.stringify(obj) + "from:" + intent);
+        response.send(JSON.stringify(obj));
+
+        });
+                //init all web routes
+                initWebRoute(app);
+                let port = process.env.PORT||8080;
+                app.listen(port, ()=> {
+                        console.log('App is running at the port ' +  port + "!");
+                });
+
+
 // app.post('/webhook', (request, response) =>{
 //     dialogflowfulfillment(request, response)
 // })
@@ -33,17 +53,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.post('/webhook', (request, response) =>{
 //      const _agent = new WebhookClient({request:request, response:response});
-
-        app.post("/webhook", function(request, response) {
-        // let _agent = new WebhookClient({request,response});
-        //const fulfillment = request.body.queryResult.fulfillmentText;
-        const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
-        const obj = {fulfillment};
-        console.log("json string is" + JSON.stringify(obj));
-        response.send(JSON.stringify(obj));
-
-
-        // function welcomeIntent(agent) {
+                // function welcomeIntent(agent) {
         //
         //     //const welcome = agent.parameters.welcome; --> this will show the intent name
         //     agent.add('This is from default welcome intent called: ' + welcome);
@@ -52,7 +62,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
         // intentMap.set("Default Welcome Intent", welcomeIntent);
         // _agent.handleRequest(intentMap).then();
 
-})
+
 
 
     // function welcomeIntent(agent) {
@@ -80,12 +90,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-//init all web routes
-initWebRoute(app);
-let port = process.env.PORT||8080;
-app.listen(port, ()=> {
-    console.log('App is running at the port ' +  port + "!");
-});
 
 
 
