@@ -24,14 +24,8 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//init all web routes
-initWebRoute(app);
-let port = process.env.PORT||8080;
-app.listen(port, ()=> {
-        console.log('App is running at the port ' +  port + "!");
-});
 
-app.post("/webhook", function(request, response) {
+        app.post("/webhook", function(request, response) {
         // let _agent = new WebhookClient({request,response});
         //const fulfillment = request.body.queryResult.fulfillmentText;
         const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
@@ -41,6 +35,12 @@ app.post("/webhook", function(request, response) {
 
 });
 
+        //init all web routes
+        initWebRoute(app);
+        let port = process.env.PORT||8080;
+        app.listen(port, ()=> {
+                console.log('App is running at the port ' +  port + "!");
+        });
 
 
 
