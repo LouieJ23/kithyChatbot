@@ -5,7 +5,7 @@ import express from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 const bodyParser = require('body-parser')
-const dialogflow = require('dialogflow');
+//const dialogflow = require('dialogflow');
 //const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express().use(bodyParser.json())
 
