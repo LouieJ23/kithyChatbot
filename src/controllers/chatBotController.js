@@ -1,9 +1,8 @@
+import express from "express";
 require("dotenv").config();
 import request from "request";
-
-// import bodyParser from "body-parser";
-// import express from "express";
-
+import bodyParser from "body-parser";
+const app = express().use(bodyParser.json())
 
 let postWebhook = (req, res) => {
     // Parse the request body from the POST
