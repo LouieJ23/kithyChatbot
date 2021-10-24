@@ -15,27 +15,27 @@ const app = express().use(bodyParser.json())
 
 
 //
-// //config view engine
-// viewEngine(app);
+//config view engine
+ viewEngine(app);
 //
 // //use body-parser to post data
-// app.use(bodyParser.json());
-// app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 //
 // //'use strict';
 //
-//         //this will fetch the dialogflow intents and response
-//         app.post("/webhook", function(request, response) {
-//         // let _agent = new WebhookClient({request,response});
-//         //const fulfillment = request.body.queryResult.fulfillmentText;
-//         const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
-//         const intent = request.body.queryResult.intent.displayName;
-//         const obj = {fulfillment};
-//         console.log("json string is" + JSON.stringify(obj) + "from:" + intent);
-//         response.send(JSON.stringify(obj));
-//
-//         });
+        //this will fetch the dialogflow intents and response
+        app.post("/webhook", function(request, response) {
+        // let _agent = new WebhookClient({request,response});
+        //const fulfillment = request.body.queryResult.fulfillmentText;
+        const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
+        const intent = request.body.queryResult.intent.displayName;
+        const obj = {fulfillment};
+        console.log("json string is" + JSON.stringify(obj) + "from:" + intent);
+        response.send(JSON.stringify(obj));
+
+        });
                 //init all web routes
                 initWebRoute(app);
                 let port = process.env.PORT||8080;
