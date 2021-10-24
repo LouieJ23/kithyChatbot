@@ -84,7 +84,16 @@ let getWebhook = (req, res) => {
         }
     }
 };
+app.post("/webhook", function(request, response) {
+    // let _agent = new WebhookClient({request,response});
+    //const fulfillment = request.body.queryResult.fulfillmentText;
+    const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
+    const intent = request.body.queryResult.intent.displayName;
+    const obj = {fulfillment};
+    console.log("json string is" + JSON.stringify(obj) + "from:" + intent);
+    response.send(JSON.stringify(obj));
 
+});
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
@@ -100,16 +109,7 @@ function handleMessage(sender_psid, received_message) {
 
 
         //this will fetch the dialogflow intents and response
-        app.post("/webhook", function(request, response) {
-            // let _agent = new WebhookClient({request,response});
-            //const fulfillment = request.body.queryResult.fulfillmentText;
-            const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
-            const intent = request.body.queryResult.intent.displayName;
-            const obj = {fulfillment};
-            console.log("json string is" + JSON.stringify(obj) + "from:" + intent);
-            response.send(JSON.stringify(obj));
 
-        });
     } else if (received_message.attachments) {
 
         // Gets the URL of the message attachment
