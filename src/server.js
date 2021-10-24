@@ -5,8 +5,8 @@ import express from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 const bodyParser = require('body-parser')
-//const dialogflow = require('dialogflow');
-//const {WebhookClient} = require('dialogflow-fulfillment');
+const dialogflow = require('dialogflow');
+const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express().use(bodyParser.json())
 
 
@@ -24,7 +24,12 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+//init all web routes
 initWebRoute(app);
+let port = process.env.PORT||8080;
+app.listen(port, ()=> {
+        console.log('App is running at the port ' +  port + "!");
+});
 
 app.post("/webhook", function(request, response) {
         // let _agent = new WebhookClient({request,response});
@@ -37,12 +42,7 @@ app.post("/webhook", function(request, response) {
 });
 
 
-        //init all web routes
-        initWebRoute(app);
-        let port = process.env.PORT||8080;
-        app.listen(port, ()=> {
-                console.log('App is running at the port ' +  port + "!");
-        });
+
 
 
 
