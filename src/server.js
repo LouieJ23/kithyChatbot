@@ -15,16 +15,27 @@ const app = express().use(bodyParser.json())
 //let app = express();
 
 
-//
 //config view engine
- viewEngine(app);
-//
-// //use body-parser to post data
+viewEngine(app);
+
+//use body-parser to post data
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
- //'use strict';
+
+initWebRoute(app);
+
+app.post("/webhook", function(request, response) {
+        // let _agent = new WebhookClient({request,response});
+        //const fulfillment = request.body.queryResult.fulfillmentText;
+        const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
+        const obj = {fulfillment};
+        console.log("json string is" + JSON.stringify(obj));
+        response.send(JSON.stringify(obj));
+
+});
+
 
         //init all web routes
         initWebRoute(app);

@@ -1,13 +1,7 @@
-import express from "express";
+//import express from "express";
 require("dotenv").config();
 import request from "request";
 
-import viewEngine from "../config/viewEngine";
-import initWebRoute from "../routes/web";
-const bodyParser = require('body-parser')
-const dialogflow = require('dialogflow');
-const {WebhookClient} = require('dialogflow-fulfillment');
-const app = express().use(bodyParser.json())
 
 
 let postWebhook = (req, res) => {
@@ -87,29 +81,6 @@ function handleMessage(sender_psid, received_message) {
         /*response = {
             "text": `You sent the message: "${received_message.text}". Now send me an image!`
         }*/
-
-
-
-//config view engine
-        viewEngine(app);
-
-//use body-parser to post data
-        app.use(bodyParser.json());
-        app.use(express.json());
-        app.use(bodyParser.urlencoded({ extended: true }));
-
-
-        initWebRoute(app);
-
-         app.post("/webhook", function(request, response) {
-        // let _agent = new WebhookClient({request,response});
-        //const fulfillment = request.body.queryResult.fulfillmentText;
-        const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
-        const obj = {fulfillment};
-        console.log("json string is" + JSON.stringify(obj));
-        response.send(JSON.stringify(obj));
-
-        });
 
 
 
