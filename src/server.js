@@ -6,7 +6,7 @@ import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 const bodyParser = require('body-parser')
 const dialogflow = require('dialogflow');
-const {WebhookClient} = require('dialogflow-fulfillment');
+//const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express().use(bodyParser.json())
 
 
@@ -23,26 +23,18 @@ const app = express().use(bodyParser.json())
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//
-// //'use strict';
 
-        //this will fetch the dialogflow intents and response
-        app.post("/webhook", function(req, res) {
-        // let _agent = new WebhookClient({request,response});
-        //const fulfillment = request.body.queryResult.fulfillmentText;
-        const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
-        const intent = req.body.queryResult.intent.displayName;
-        const obj = {fulfillment};
-        console.log("json string is" + JSON.stringify(obj) + "from:" + intent);
-        res.send(JSON.stringify(obj));
+ //'use strict';
 
+        //init all web routes
+        initWebRoute(app);
+        let port = process.env.PORT||8080;
+        app.listen(port, ()=> {
+                console.log('App is running at the port ' +  port + "!");
         });
-                //init all web routes
-                initWebRoute(app);
-                let port = process.env.PORT||8080;
-                app.listen(port, ()=> {
-                        console.log('App is running at the port ' +  port + "!");
-                });
+
+
+
 
 
 
