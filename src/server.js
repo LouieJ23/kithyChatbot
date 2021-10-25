@@ -10,9 +10,6 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express().use(bodyParser.json())
 
 
-// import bodyParser from "body-parser";
-//const axios = require('axios');
-//let app = express();
 
 
 //config view engine
@@ -24,7 +21,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
+        //this code will get the intent triggered in dialogflow through json
         app.post("/webhook", function(request, response) {
         // let _agent = new WebhookClient({request,response});
         //const fulfillment = request.body.queryResult.fulfillmentText;
@@ -41,12 +38,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
         app.listen(port, ()=> {
                 console.log('App is running at the port ' +  port + "!");
         });
-
-
-
-
-
-
 
 
 // app.post('/webhook', (request, response) =>{
@@ -66,8 +57,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
         // let intentMap = new Map();
         // intentMap.set("Default Welcome Intent", welcomeIntent);
         // _agent.handleRequest(intentMap).then();
-
-
 
 
     // function welcomeIntent(agent) {
