@@ -168,6 +168,4 @@ module.exports = {
     getWebhook: getWebhook
 };
 
-/*MY_VERIFY_FB_TOKEN=KithyChatbotForKitaotao
-#FB_PAGE_TOKEN=EAAKrRtLD50cBAPTxGZBm2loK87CJ64w7vntQoA0pEc1v4lgSGQvMVtgL2RBrS7ZCsEcK1eEuBiylKRFnqwZCZBXJRJ6wXsQHw56UiBcWyKZCtm9sZAmHXn1XB4Ew690PYLmorZCpZBGVoiMZC3ICjiSg5BF36NmRl8Jia64g5wcm0uRtLbXFTrNh5
-*/
+
