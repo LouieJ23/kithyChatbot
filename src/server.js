@@ -40,7 +40,7 @@ app.post("/webhook", (req, res) => {
         function welcomeIntent(agent) {
                 let input = "Just going to say hi";
 
-                if(input === ("Just going to say hi")
+                if(input === "Just going to say hi")
                         agent.add("Hello there, how can I help you?");
 
         }
