@@ -43,7 +43,7 @@ app.post("/webhook", (req, res) => {
                         agent.add('The contact number is: 09555555555');
                         console.log("This is the input: " + input);
                 }
-                       else
+                       else if (input !== "What is your mobile phone contact?")
                 {
                                 const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                                 const obj = {fulfillment};
