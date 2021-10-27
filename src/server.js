@@ -38,7 +38,8 @@ app.post("/webhook", (req, res) => {
 
                 if(input === "What is your mobile phone contact?")
                         agent.add('The contact number is: 09555555555');
-                        console.log("This is the response: ", contact.agent)
+                        console.log("This is the input: ", input);
+                        console.log("This is the response: ", agent);
         }
 
         function fallback(agent){
