@@ -31,29 +31,26 @@ app.post("/webhook", (req, res) => {
 
                 if(input === "Just going to say hi")
                         agent.add("Hello there, how can I help you Louie?");
-
-        }
-        function contact(agent) {
-                let input = "What is your mobile phone contact?";
-
-                if(input === "What is your mobile phone contact?")
-                        agent.add('The contact number is: 09555555555');
                         console.log("This is the input: "+ input);
+                        const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
+                        const obj = {fulfillment};
+                        console.log("json string is" + JSON.stringify(obj));
+        }
+        function contact(res) {
+               // let input = "What is your mobile phone contact?";
+
+                //if(input === "What is your mobile phone contact?")
+                        //agent.add('The contact number is: 09555555555');
+                       // console.log("This is the input: "+ input);
                         const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                                 const obj = {fulfillment};
                                 console.log("json string is" + JSON.stringify(obj));
+                                res.send(JSON.stringify(obj));
         }
 
-        function fallback(agent){
-                const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
-                const obj = {fulfillment};
-                console.log("json string is" + JSON.stringify(obj));
-                agent.send(JSON.stringify(obj));
-        }
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcomeIntent);
         intentMap.set('Contact Information', contact);
-        intentMap.set('Default Fallback Intent', fallback);
         _agent.handleRequest(intentMap);
         });
 
