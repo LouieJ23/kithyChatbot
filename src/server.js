@@ -38,6 +38,10 @@ app.post("/webhook", (req, res) => {
         let _agent = new WebhookClient({request, response});
 
         function welcomeIntent(agent) {
+                let input = "Just going to say hi";
+
+                if(input === ("Just going to say hi")
+                        agent.add("Hello there, how can I help you?");
 
         }
         function contact(agent) {
@@ -50,7 +54,7 @@ app.post("/webhook", (req, res) => {
         intentMap.set('Default Welcome Intent', welcomeIntent);
         intentMap.set('Contact Information', contact);
         _agent.handleRequest(intentMap);
-        })
+        });
 
 
 
