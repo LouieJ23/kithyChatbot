@@ -36,12 +36,12 @@ app.post("/webhook", (req, res) => {
                         const obj = {fulfillment};
                         console.log("json string is" + JSON.stringify(obj));
         }
-        function contact() {
-               // let input = "What is your mobile phone contact?";
+        function contact(agent) {
+               let input = "What is your mobile phone contact?";
 
-                //if(input === "What is your mobile phone contact?")
-                        //agent.add('The contact number is: 09555555555');
-                       // console.log("This is the input: "+ input);
+                if(input === "What is your mobile phone contact?")
+                        agent.add('The contact number is: 09555555555');
+                       console.log("This is the input: "+ input);
                         const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                                 const obj = {fulfillment};
                                 console.log("json string is" + JSON.stringify(obj));
