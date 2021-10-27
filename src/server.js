@@ -27,16 +27,17 @@ viewEngine(app);
 app.post("/webhook", (req, res) => {
         let _agent = new WebhookClient({request: req, response:res});
 
-                const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
-                const obj = {fulfillment};
-                console.log("json string is" + JSON.stringify(obj));
-                res.send(JSON.stringify(obj));
+
 
         function welcomeIntent(agent) {
                 let input = "Just going to say hi";
 
                 if(input === "Just going to say hi")
                         agent.add("Hello there, how can I help you Louie?");
+                        const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
+                        const obj = {fulfillment};
+                        console.log("json string is" + JSON.stringify(obj));
+                        res.send(JSON.stringify(obj));
         }
         function contact(agent) {
                 let input = "What is your mobile phone contact?";
