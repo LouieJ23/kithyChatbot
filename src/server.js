@@ -44,7 +44,13 @@ app.post("/webhook", function(request, response) {
         intentMap.set('Default Welcome Intent', welcomeIntent);
         intentMap.set('Contact Information', contact);
         _agent.handleRequest(intentMap);
+
+        const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
+        const obj = {fulfillment};
+        console.log("json string is" + JSON.stringify(obj));
+        response.send(JSON.stringify(obj));
         });
+
 
 
 //init all web routes
