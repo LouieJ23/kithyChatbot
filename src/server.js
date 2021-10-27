@@ -32,12 +32,16 @@ app.post("/webhook", function(request, response) {
 
                 if(input === "Just going to say hi")
                         agent.add("Hello there, how can I help you Louie?");
+                else
+                     agent.add("Sorry, I didn't get that!")   ;
         }
         function contact(agent) {
                 let input = "What is your mobile phone contact?";
 
                 if(input === "What is your mobile phone contact?")
                         agent.add('The contact number is: 09555555555');
+                else
+                        agent.add("Sorry. Try again!");
         }
 
         let intentMap = new Map();
