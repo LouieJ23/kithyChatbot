@@ -38,11 +38,16 @@ app.post("/webhook", (req, res) => {
 
                 if(input === "What is your mobile phone contact?")
                         agent.add('The contact number is: 09555555555');
+                        console.log("This is the response: ", contact.agent)
+        }
+
+        function fallback(agent){
 
         }
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcomeIntent);
         intentMap.set('Contact Information', contact);
+        intentMap.set('Default Fallback Intent', fallback);
         _agent.handleRequest(intentMap);
         });
 
