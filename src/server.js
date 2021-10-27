@@ -37,18 +37,14 @@ app.post("/webhook", (req, res) => {
 
                 if(input === "Just going to say hi")
                         agent.add("Hello there, how can I help you Louie?");
-                        fulfillment(agent);
-
         }
         function contact(agent) {
                 let input = "What is your mobile phone contact?";
 
                 if(input === "What is your mobile phone contact?")
                         agent.add('The contact number is: 09555555555');
-                        fulfillment(agent);
+
         }
-
-
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcomeIntent);
         intentMap.set('Contact Information', contact);
