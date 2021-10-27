@@ -45,7 +45,10 @@ app.post("/webhook", (req, res) => {
         }
 
         function fallback(agent){
-
+                const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
+                const obj = {fulfillment};
+                console.log("json string is" + JSON.stringify(obj));
+                agent.send(JSON.stringify(obj));
         }
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcomeIntent);
