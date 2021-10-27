@@ -45,9 +45,7 @@ app.post("/webhook", function(request, response) {
         intentMap.set('Contact Information', contact);
         _agent.handleRequest(intentMap);
         });
-app.get("/", (req, res) =>{
-        res.send("Hello world!")
-})
+
 
 //init all web routes
 initWebRoute(app);
