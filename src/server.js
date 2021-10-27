@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //config view engine
 viewEngine(app);
 
+        app.get("/", (req, res) => {
+                res.send("Hello World!");
+        })
 
         //this code will get the intent triggered in dialogflow through json
         app.post("/webhook", function(request, response) {
