@@ -31,9 +31,6 @@ app.post("/webhook", (req, res) => {
 
                 if(input === "Just going to say hi")
                         agent.add("Hello there, how can I help you Louie?");
-                        const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
-                        const obj = {fulfillment};
-                        console.log("json string is" + JSON.stringify(obj));
 
         }
         function contact(agent) {
