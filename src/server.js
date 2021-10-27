@@ -47,7 +47,7 @@ app.post("/webhook", function(request, response) {
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcomeIntent);
         intentMap.set('Contact Information', contact);
-        _agent.handleRequest(intentMap).then();
+        _agent.handleRequest(intentMap);
         });
 
 
