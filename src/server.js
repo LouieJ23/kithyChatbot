@@ -14,38 +14,47 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//init all web routes
+initWebRoute(app);
+let port = process.env.PORT||8080;
+app.listen(port, ()=> {
+        console.log('App is running at the port ' +  port + "!");
+});
+
 //config view engine
 viewEngine(app);
 
-        app.get("/", (req, res) => {
-                res.send("Hello World!");
-        })
 
         //this code will get the intent triggered in dialogflow through json
-        app.post("/webhook", function(request, response) {
-        // let _agent = new WebhookClient({request,response});
-        //const fulfillment = request.body.queryResult.fulfillmentText;
-                const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
-                const obj = {fulfillment};
-                console.log("json string is" + JSON.stringify(obj));
-                response.send(JSON.stringify(obj));
+        // app.post("/webhook", function(request, response) {
+        // // let _agent = new WebhookClient({request,response});
+        //         const fulfillment = request.body.queryResult.fulfillmentMessages[0].text.text[0];
+        //         const obj = {fulfillment};
+        //         console.log("json string is" + JSON.stringify(obj));
+        //         response.send(JSON.stringify(obj));
+        //
+        // });
+app.post("/webhook", (req, res) => {
+        let _agent = new WebhookClient({request, response});
 
-        });
+        function welcomeIntent(agent) {
 
-        //init all web routes
-        initWebRoute(app);
-        let port = process.env.PORT||8080;
-        app.listen(port, ()=> {
-                console.log('App is running at the port ' +  port + "!");
-        });
+        }
+        function contact(agent) {
+                let input = "What is your mobile phone contact?";
+
+                if(input === "What is your mobile phone contact?")
+                        agent.add('The contact number is: 09555555555');
+        }
+        let intentMap = new Map();
+        intentMap.set('Default Welcome Intent', welcomeIntent);
+        intentMap.set('Contact Information', contact);
+        _agent.handleRequest(intentMap);
+        })
 
 
-// app.post('/webhook', (request, response) =>{
-//     dialogflowfulfillment(request, response)
-// })
-//
-// let dialogflowfulfillment = (request, response) => {
-//     let agent = new WebhookClient({request, response})
+
+
 
 // app.post('/webhook', (request, response) =>{
 //      const _agent = new WebhookClient({request:request, response:response});
