@@ -1,12 +1,12 @@
 require("dotenv").config();
-import express from "express";
+import express, {response} from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 const bodyParser = require('body-parser')
 const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express().use(bodyParser.json())
-
+import request from "request";
 
 
 //use body-parser to post data
@@ -14,15 +14,12 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//init all web routes
-initWebRoute(app);
-let port = process.env.PORT||8080;
-app.listen(port, ()=> {
-        console.log('App is running at the port ' +  port + "!");
-});
+viewEngine(app);
+
+
 
 //config view engine
-viewEngine(app);
+
 
 
         //this code will get the intent triggered in dialogflow through json
@@ -35,7 +32,7 @@ viewEngine(app);
         //
         // });
 app.post("/webhook", (req, res) => {
-        let _agent = new WebhookClient({request, response});
+        let _agent = new WebhookClient({request: req, response:res});
 
         function welcomeIntent(agent) {
                 let input = "Just going to say hi";
@@ -57,7 +54,12 @@ app.post("/webhook", (req, res) => {
         });
 
 
-
+//init all web routes
+initWebRoute(app);
+let port = process.env.PORT||8080;
+app.listen(port, ()=> {
+        console.log('App is running at the port ' +  port + "!");
+});
 
 
 // app.post('/webhook', (request, response) =>{
