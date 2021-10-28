@@ -9,33 +9,38 @@
 <body>
 
 <h1>WELCOME TO KITHY CHATBOT!</h1>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+        chat-title="KithyChatbot"
+        agent-id="7bad499e-6726-48e0-a97a-653af60e92f2"
+        language-code="en"
+></df-messenger>
+<!--&lt;!&ndash; Messenger Chat Plugin Code &ndash;&gt;-->
+<!--<div id="fb-root"></div>-->
 
-<!-- Messenger Chat Plugin Code -->
-<div id="fb-root"></div>
+<!--&lt;!&ndash; Your Chat Plugin code &ndash;&gt;-->
+<!--<div id="fb-customer-chat" class="fb-customerchat">-->
+<!--</div>-->
 
-<!-- Your Chat Plugin code -->
-<div id="fb-customer-chat" class="fb-customerchat">
-</div>
+<!--<script>-->
+<!--    let chatbox = document.getElementById('fb-customer-chat');-->
+<!--    chatbox.setAttribute("page_id", "100672612218151");-->
+<!--    chatbox.setAttribute("attribution", "biz_inbox");-->
 
-<script>
-    let chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "100672612218151");
-    chatbox.setAttribute("attribution", "biz_inbox");
+<!--    window.fbAsyncInit = function() {-->
+<!--        FB.init({-->
+<!--            xfbml            : true,-->
+<!--            version          : 'v6.0'-->
+<!--        });-->
+<!--    };-->
 
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml            : true,
-            version          : 'v6.0'
-        });
-    };
-
-    (function(d, s, id) {
-        let js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<!--    (function(d, s, id) {-->
+<!--        let js, fjs = d.getElementsByTagName(s)[0];-->
+<!--        if (d.getElementById(id)) return;-->
+<!--        js = d.createElement(s); js.id = id;-->
+<!--        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';-->
+<!--        fjs.parentNode.insertBefore(js, fjs);-->
+<!--    }(document, 'script', 'facebook-jssdk'));-->
+<!--</script>-->
 </body>
 </html>
