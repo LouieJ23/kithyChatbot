@@ -38,7 +38,7 @@ app.post("/webhook", (req, res) => {
                         console.log("json string is" + JSON.stringify(obj));
         }
         function contact(agent) {
-               let input = req.body.queryText;
+               const input = req.body.queryResult;
                console.log("This is the agent: " + input);
                 if(input === "What is your mobile phone contact?") {
                         agent.add('The contact number is: 09555555555');
