@@ -28,7 +28,7 @@ app.post("/webhook", (req, res) => {
         let _agent = new WebhookClient({request: req, response:res});
 
         function welcomeIntent(agent) {
-                let input = " ";
+                const input = req.body.queryResult.queryText;
 
                 if(input === "Just going to say hi")
                         agent.add("Hello there, how can I help you Louie?");
