@@ -67,6 +67,10 @@ app.post("/webhook", (req, res) => {
         _agent.handleRequest(intentMap);
         });
 
+        app.get((req, res)=>{
+                console.log(res);
+        });
+
 
 //init all web routes
 initWebRoute(app);
