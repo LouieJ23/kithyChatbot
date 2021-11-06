@@ -67,32 +67,6 @@ app.post("/webhook", (req, res) => {
         _agent.handleRequest(intentMap);
         });
 
- app.getWebhook ("/", req, res) => {
-    // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "FACEBOOK_PAGE_ACCESS_TOKEN"
-
-    // Parse the query params
-    let mode = req.query['hub.mode'];
-    let token = req.query['hub.verify_token'];
-    let challenge = req.query['hub.challenge'];
-
-    // Checks if a token and mode is in the query string of the request
-    if (mode && token) {
-
-        // Checks the mode and token sent is correct
-        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-
-            // Responds with the challenge token from the request
-            console.log('WEBHOOK_VERIFIED');
-            res.status(200).send(challenge);
-
-        } else {
-            // Responds with '403 Forbidden' if verify tokens do not match
-            res.sendStatus(403);
-        }
-    }
-}
-
 
 //init all web routes
 initWebRoute(app);
@@ -125,18 +99,6 @@ app.listen(port, ()=> {
             // });
 
     // }
-
-    // function fallback(agent) {
-    //     agent.add('This is from default fallback intent called: ')
-    // }
-    //
-    // let intentMap = new Map();
-    // intentMap.set("Default Welcome Intent", welcomeIntent);
-    // intentMap.set("Default Fallback Intent", fallback);
-    // _agent.handleRequest(intentMap)
-
-// }
-
 
 
 
