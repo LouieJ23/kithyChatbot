@@ -39,10 +39,10 @@ app.post("/webhook", (req, res) => {
         }
         function contact(agent) {
                let input = req.body.queryText;
-               console.log("This is the input: " + input);
+               console.log("This is the agent: " + input);
                 if(input === "What is your mobile phone contact?") {
                         agent.add('The contact number is: 09555555555');
-                        console.log("This is the input: " + input);
+                        console.log("This is the input: " + agent);
                 }
                        else if (input !== "What is your mobile phone contact?")
                 {
