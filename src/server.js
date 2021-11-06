@@ -31,11 +31,20 @@ app.post("/webhook", (req, res) => {
                 const input = req.body.queryResult.queryText;
 
                 if(input === "Just going to say hi")
+                {
                         agent.add("Hello there, how can I help you Louie?");
                         console.log("This is the input: "+ input);
                         const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                         const obj = {fulfillment};
                         console.log("json string is" + JSON.stringify(obj));
+                }
+                else {
+                        agent.add("Hello there, how can I help you man?");
+                        console.log("This is the input: "+ input);
+                        const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
+                        const obj = {fulfillment};
+                        console.log("json string is" + JSON.stringify(obj));
+                }
         }
         function contact(agent) {
                const input = req.body.queryResult.queryText;
