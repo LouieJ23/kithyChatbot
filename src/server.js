@@ -67,11 +67,11 @@ app.post("/webhook", (req, res) => {
         _agent.handleRequest(intentMap);
         });
 
-        app.get((req, res)=>{
-                console.log(res);
-        });
+        // app.get((req, res)=>{
+        //         console.log(res);
+        // });
 
-        let getWebhook = (req, res) => {
+        app.get((req, res) => {
                 // Your verify token. Should be a random string.
                 let VERIFY_TOKEN = "FACEBOOK_PAGE_ACCESS_TOKEN"
             
@@ -95,7 +95,7 @@ app.post("/webhook", (req, res) => {
                         res.sendStatus(403);
                     }
                 }
-            };
+            });
             
 
 //init all web routes
@@ -104,31 +104,6 @@ let port = process.env.PORT||8080;
 app.listen(port, ()=> {
         console.log('App is running at the port ' +  port + "!");
 });
-
-
-// app.post('/webhook', (request, response) =>{
-//      const _agent = new WebhookClient({request:request, response:response});
-                // function welcomeIntent(agent) {
-        //
-        //     //const welcome = agent.parameters.welcome; --> this will show the intent name
-        //     agent.add('This is from default welcome intent called: ' + welcome);
-        // }
-        // let intentMap = new Map();
-        // intentMap.set("Default Welcome Intent", welcomeIntent);
-        // _agent.handleRequest(intentMap).then();
-
-
-    // function welcomeIntent(agent) {
-    //     const welcome = agent.parameters.welcome;
-    //     agent.add('This is from default welcome intent called: ' + welcome);
-            //  return axios.get('/webhook')
-            // .then((result) => {
-            //     result.data.map(welcomeObj => {
-            //         agent.add(welcomeObj.welcome);
-            //         });
-            // });
-
-    // }
 
 
 
