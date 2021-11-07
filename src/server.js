@@ -27,7 +27,7 @@ viewEngine(app);
  //init all web routes
  initWebRoute(app);
      
-let postWebhook=("/webhook", (req, res) => {
+ app.post("/webhook", (req, res) => {
         let _agent = new WebhookClient({request: req, response:res});
 
 
@@ -82,7 +82,7 @@ let postWebhook=("/webhook", (req, res) => {
         });
 
 
-       let getWebhook=(req, res) => {
+       app.get((req, res) => {
                 // Your verify token. Should be a random string.
                 let VERIFY_TOKEN = "FACEBOOK_PAGE_ACCESS_TOKEN"
             
@@ -108,7 +108,7 @@ let postWebhook=("/webhook", (req, res) => {
                 }
 
                 console.log('This is the response: '+res);
-            };
+            });
             
 
 
