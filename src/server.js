@@ -82,7 +82,7 @@ viewEngine(app);
         });
 
 
-       app.get((req, res) => {
+       app.get("/", function(req, res){
                 // Your verify token. Should be a random string.
                 let VERIFY_TOKEN = "FACEBOOK_PAGE_ACCESS_TOKEN"
             
