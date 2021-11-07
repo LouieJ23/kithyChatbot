@@ -24,11 +24,12 @@ viewEngine(app);
         //         response.send(JSON.stringify(obj));
         //
         // });
-        
-        //init all web routes
-        initWebRoute(app);
+ //init all web routes
+ initWebRoute(app);
+       
 app.post("/webhook", (req, res) => {
         let _agent = new WebhookClient({request: req, response:res});
+
 
         function welcomeIntent(agent) {
                 const input = req.body.queryResult.queryText;
