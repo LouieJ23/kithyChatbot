@@ -45,14 +45,6 @@ viewEngine(app);
               // Get the sender PSID
               let sender_psid = webhook_event.sender.id;
               console.log('Sender PSID: ' + sender_psid);
-  
-  // Check if the event is a message or postback and
-            // pass the event to the appropriate handler function
-            if (webhook_event.message) {
-                handleMessage(sender_psid, webhook_event.message);
-            } else if (webhook_event.postback) {
-                handlePostback(sender_psid, webhook_event.postback);
-            }
 
         });
 
@@ -63,10 +55,8 @@ viewEngine(app);
             // Return a '404 Not Found' if event is not from a page subscription
             res.sendStatus(404);
         }
-    };
+   
     
-    
-
 
         function welcomeIntent(agent) {
                 const input = req.body.queryResult.queryText;
@@ -116,6 +106,7 @@ viewEngine(app);
         intentMap.set('Contact Information', contact);
         intentMap.set('Default Fallback Intent', fallback);
         _agent.handleRequest(intentMap);
+};
      
 // app.post("/webhook", (req, res) => {
 //         let _agent = new WebhookClient({request: req, response:res});
