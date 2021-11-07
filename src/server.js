@@ -1,7 +1,7 @@
 require("dotenv").config();
 import express from "express";
 import viewEngine from "./config/viewEngine";
-import initWebRoute from "./routes/web";
+import initWebRoute from "./routes/web.js";
 const bodyParser = require('body-parser')
 const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
@@ -24,6 +24,9 @@ viewEngine(app);
         //         response.send(JSON.stringify(obj));
         //
         // });
+        
+        //init all web routes
+        initWebRoute(app);
 app.post("/webhook", (req, res) => {
         let _agent = new WebhookClient({request: req, response:res});
 
@@ -110,8 +113,7 @@ app.post("/webhook", (req, res) => {
             });
             
 
-//init all web routes
-initWebRoute(app);
+
 let port = process.env.PORT||8080;
 app.listen(port, ()=> {
         console.log('App is running at the port ' +  port + "!");
