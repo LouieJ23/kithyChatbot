@@ -39,7 +39,7 @@ let postWebhook = ("/webhook",(req, res) => {
     }
 });
 
-let getWebhook = (req, res) => {
+let getWebhook = ("/webhook",(req, res) => {
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = "FACEBOOK_PAGE_ACCESS_TOKEN"
 
@@ -63,7 +63,7 @@ let getWebhook = (req, res) => {
             res.sendStatus(403);
         }
     }
-};
+});
 
 
 // Handles messages events
