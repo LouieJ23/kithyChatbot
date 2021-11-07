@@ -27,7 +27,7 @@ viewEngine(app);
  //init all web routes
  initWebRoute(app);
      
- app.post("/webhook", (req, res) => {
+ app.post("/webhook", function(req, res){
         let _agent = new WebhookClient({request: req, response:res});
 
 
