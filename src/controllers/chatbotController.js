@@ -1,7 +1,7 @@
 require("dotenv").config();
 import request from "request";
 
-let postWebhook = (req, res) => {
+let postWebhook = ("/webhook",(req, res) => {
     // Parse the request body from the POST
     let body = req.body;
 
@@ -37,7 +37,7 @@ let postWebhook = (req, res) => {
         // Return a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
     }
-};
+});
 
 let getWebhook = (req, res) => {
     // Your verify token. Should be a random string.
