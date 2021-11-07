@@ -5,13 +5,7 @@ import initWebRoute from "./routes/web.js";
 const bodyParser = require('body-parser')
 const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
-<<<<<<< HEAD
 const app = express();
-
-=======
-const app = express().use(bodyParser.json())
- 
->>>>>>> 361369996d3abb06c1aa7c8abf86cf29bce57ed4
 
 
 //use body-parser to post data
