@@ -8,6 +8,8 @@ const Post = require('../modules/Post');
 
 router.post("/", async (req, res)=>{
             let _agent = new WebhookClient({request: req, response:res});
+
+            const post = await Post.find();
     
             console.log(req.body.processTitle);
             function welcomeIntent(agent) {
@@ -15,7 +17,8 @@ router.post("/", async (req, res)=>{
     
                     if(input === "Just going to say hi")
                     {
-                            agent.add("Hello there, how can I help you Louie?");
+                            // agent.add("Hello there, how can I help you Louie?");
+                            agent.add(post[0].title);
                             console.log("This is the input: "+ input);
                             const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                             const obj = {fulfillment};
