@@ -15,7 +15,8 @@ router.post("/", async (req, res)=>{
     
                     if(input === "Just going to say hi")
                     {
-                            agent.add("Hello there, how can I help you Louie?");
+                            // agent.add("Hello there, how can I help you Louie?");
+                            agent.add(req.body.intent);
                             // agent.add(post[0].title);
                             console.log("This is the input: "+ input);
                             const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
