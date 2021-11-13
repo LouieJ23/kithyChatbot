@@ -12,16 +12,18 @@ router.post("/", async (req, res)=>{
             console.log(req.body.processTitle);
             function welcomeIntent(agent) {
                     const input = req.body.queryResult.queryText;
-    
+
+
                     if(input === "Just going to say hi")
                     {
-                            // agent.add("Hello there, how can I help you Louie?");
-                            agent.add(req.body.intent);
+                            agent.add("Hello there, how can I help you Louie?");
+                            // agent.add(req.body.intent);
                             // agent.add(post[0].title);
                             console.log("This is the input: "+ input);
                             const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                             const obj = {fulfillment};
                             console.log("json string is" + JSON.stringify(obj));
+                            console.log("intent body is "+req.body.intent);
                     }
                     else {
                             agent.add("Hello there, how can I help you man?");
