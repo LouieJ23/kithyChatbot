@@ -8,8 +8,6 @@ const Post = require('../modules/Post');
 
 router.post("/", async (req, res)=>{
             let _agent = new WebhookClient({request: req, response:res});
-
-            const post = await Post.find();
     
             console.log(req.body.processTitle);
             function welcomeIntent(agent) {
@@ -62,7 +60,7 @@ router.post("/", async (req, res)=>{
             intentMap.set('Default Fallback Intent', fallback);
             _agent.handleRequest(intentMap);
             
-
+            console.log(req.body);
 
 });
 
