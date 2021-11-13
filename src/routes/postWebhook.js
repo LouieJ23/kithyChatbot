@@ -23,7 +23,7 @@ router.post("/", async (req, res)=>{
                             const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                             const obj = {fulfillment};
                             console.log("json string is" + JSON.stringify(obj));
-                            console.log("intent body is "+req.body.intent);
+                            // console.log("intent body is "+req.body.intent);
                     }
                     else {
                             agent.add("Hello there, how can I help you man?");
