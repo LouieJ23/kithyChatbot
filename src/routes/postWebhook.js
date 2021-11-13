@@ -3,18 +3,13 @@ const router = express.Router();
 const ProcessInfo = require('../modules/ProcessInfo');
 const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
+const Post = require('../modules/Post');
 
-router.get("/", (req, res)=>{
-         
 
-            res.send('This is the response: '+res.body);
-    
-        });
-
-router.post("/", (req, res)=>{
+router.post("/", async (req, res)=>{
             let _agent = new WebhookClient({request: req, response:res});
     
-    
+            console.log(req.body.processTitle);
             function welcomeIntent(agent) {
                     const input = req.body.queryResult.queryText;
     
@@ -65,7 +60,14 @@ router.post("/", (req, res)=>{
             _agent.handleRequest(intentMap);
             
 
-            console.log(req.body);
+
+});
+
+
+router.get("/", (req, res)=>{
+         
+
+    res.send('This is the response: '+res.body);
 
 });
 
