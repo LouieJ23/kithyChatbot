@@ -9,7 +9,7 @@ const Post = require('../modules/Post');
 router.post("/", async (req, res)=>{
             let _agent = new WebhookClient({request: req, response:res});
 
-            const post = await Post.find();
+            // const post = await Post.find();
     
             console.log(req.body.processTitle);
             function welcomeIntent(agent) {
