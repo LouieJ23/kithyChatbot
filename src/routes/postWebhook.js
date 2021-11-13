@@ -60,7 +60,7 @@ router.post("/", async (req, res)=>{
             intentMap.set('Default Fallback Intent', fallback);
             _agent.handleRequest(intentMap);
             
-            console.log(req.body);
+            console.log("Request body = "+req.body);
 
 });
 
