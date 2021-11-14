@@ -9,7 +9,7 @@ const Post = require('../modules/Post');
 router.post("/", async (req, res)=>{
             let _agent = new WebhookClient({request: req, response:res});
                 
-            console.log("Request Body = "+req.body);
+            console.log("Request Body  [Query Result]= "+req.body.queryResult);
             function welcomeIntent(agent) {
                     const input = req.body.queryResult.queryText;
 
