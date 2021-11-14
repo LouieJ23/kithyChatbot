@@ -13,9 +13,10 @@ router.post("/", async (req, res)=>{
             function welcomeIntent(agent) {
                     const input = req.body.queryResult.queryText;
 
-                    console.log("Request Body  [Query Result]= "+req.body);
+                    
                     if(input === "Just going to say hi")
                     {
+                        console.log("Request Body  [Query Result]= "+req.body);
                             agent.add("Hello there, how can I help you Louie?");
                             // agent.add(req.body.intent);
                             // agent.add(post[0].title);
