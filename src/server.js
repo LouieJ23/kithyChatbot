@@ -19,7 +19,7 @@ mongoose.connect("mongodb+srv://user1:user1@kithychatbot.a4dgc.mongodb.net/myFir
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/boss', post);
+app.use('/post', post);
 app.use('/webhook', postWebhook);
 
 viewEngine(app);
