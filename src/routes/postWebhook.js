@@ -14,10 +14,10 @@ router.post("/", async (req, res)=>{
                     const input = req.body.queryResult.queryText;
 
                     
-                //     if(input === "Just going to say hi")
+                        if(input === "Just going to say hi")
                     
                         console.log("Response ID= "+req.body.responseId);
-                            //agent.add("Hello there, how can I help you Louie?");
+                            agent.add("Hello there, how can I help you Louie?");
                             // agent.add(req.body.intent);
                             // agent.add(post[0].title);
                             console.log("This is the input: "+ input);
