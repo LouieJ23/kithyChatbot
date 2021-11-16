@@ -20,8 +20,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/', (req, res) => {
- res.send("This is the post page!");
-});
+// router.get('/', (req, res) => {
+//  res.send("This is the post page!");
+// });
 
 module.exports=router;
