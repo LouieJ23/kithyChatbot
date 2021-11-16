@@ -17,7 +17,7 @@ router.post("/", async (req, res)=>{
                 //     if(input === "Just going to say hi")
                     
                         console.log("Response ID= "+req.body.responseId);
-                            agent.add("Hello there, how can I help you Louie?");
+                            //agent.add("Hello there, how can I help you Louie?");
                             // agent.add(req.body.intent);
                             // agent.add(post[0].title);
                             console.log("This is the input: "+ input);
