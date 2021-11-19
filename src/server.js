@@ -10,9 +10,11 @@ const mongoose = require('mongoose');
 const post = require('./routes/post');
 const postWebhook = require('./routes/postWebhook');
 
-mongoose.connect("mongodb+srv://user1:user1@kithychatbot.a4dgc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",()=>{
-        console.log("Database Connected!");
-});
+mongoose.connect(process.env.DB_CONNECTION,
+        {useNewUrlParser: true},
+        ()=> console.log("Database Connected!")
+);
+
 
 
 //use body-parser to post data

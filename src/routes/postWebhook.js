@@ -15,8 +15,8 @@ router.post("/", async (req, res)=>{
 
                     
                         if(input === "Just going to say hi")
-                    
-                        console.log("Response ID= "+req.body.responseId);
+                    {
+                        console.log("Response ID= " + req.body.responseId);
                             agent.add("Hello there, how can I help you Louie?");
                             // agent.add(req.body.intent);
                             // agent.add(post[0].title);
@@ -25,15 +25,16 @@ router.post("/", async (req, res)=>{
                             const obj = {fulfillment};
                             console.log("json string is" + JSON.stringify(obj));
                             // console.log("intent body is "+req.body.intent);
-                //     }
-                //     else {
-                //             agent.add("Hello there, how can I help you man?");
-                //             console.log("This is the input: "+ input);
-                //             const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
-                //             const obj = {fulfillment};
-                //             console.log("json string is" + JSON.stringify(obj));
-                //     }
+                    }
+                    else {
+                            agent.add("Hello there, how can I help you man?");
+                            console.log("This is the input: "+ input);
+                            const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
+                            const obj = {fulfillment};
+                            console.log("json string is" + JSON.stringify(obj));
+                         }
             }
+        
             function contact(agent) {
                    const input = req.body.queryResult.queryText;
                    console.log("This is the input: " + input);
@@ -70,10 +71,7 @@ router.post("/", async (req, res)=>{
 
 
 router.get("/", (req, res)=>{
-         
-
-    res.send('This is the response: '+res.body);
-
+    res.send('This is the response: '+ res.body);
 });
 
 module.exports=router;
