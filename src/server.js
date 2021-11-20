@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const dialogflow = require('dialogflow');
 const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express(); //we execute the express package
+
+//import the routes
 const mongoose = require('mongoose');
 const post = require('./routes/post');
 const postWebhook = require('./routes/postWebhook');

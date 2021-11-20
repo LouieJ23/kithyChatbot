@@ -5,7 +5,8 @@ const Post = require('../modules/Post');
 router.post('/', async (req, res) => {
     const post = new Post({
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+      
     });
 
     try {

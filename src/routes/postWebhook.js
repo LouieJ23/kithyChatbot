@@ -18,13 +18,10 @@ router.post("/", async (req, res)=>{
                     {
                         console.log("Response ID= " + req.body.responseId);
                             agent.add("Hello there, how can I help you Louie?");
-                            // agent.add(req.body.intent);
-                            // agent.add(post[0].title);
                             console.log("This is the input: "+ input);
                             const fulfillment = req.body.queryResult.fulfillmentMessages[0].text.text[0];
                             const obj = {fulfillment};
                             console.log("json string is" + JSON.stringify(obj));
-                            // console.log("intent body is "+req.body.intent);
                     }
                     else {
                             agent.add("Hello there, how can I help you man?");
@@ -65,13 +62,16 @@ router.post("/", async (req, res)=>{
             intentMap.set('Default Fallback Intent', fallback);
             _agent.handleRequest(intentMap);
             
-            console.log("Request body = "+req.body);
+            console.log("Request body = "+ req.body.title);
+            console.log("Request body = "+ req.body.description);
+            console.log("Request body = "+ req.body.date);
+            
 
 });
 
 
 router.get("/", (req, res)=>{
     res.send('This is the response: '+ res.body);
-});
+});  
 
 module.exports=router;
