@@ -20,9 +20,10 @@ mongoose.connect(process.env.DB_CONNECTION,
 
 
 //use body-parser to post data
-app.use(bodyParser.json());
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
+// app.use(bodyParser.urlencoded({extended:true}));
+// app.use(bodyParser.json());
 app.use('/post', post);
 app.use('/webhook', postWebhook);
 
